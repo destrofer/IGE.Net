@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{22B06B4F-939A-494C-A709-1155D3DBBFDF}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>IGE.Net</RootNamespace>
+    <AssemblyName>IGE.Net</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>.\obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
+    <NoWin32Manifest>False</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>.\bin\$(Configuration)\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>.\obj\$(Configuration)\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>.\bin\$(Configuration)\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>.\obj\$(Configuration)\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="Clients\HTTPClient.cs" />
+    <Compile Include="Clients\WebSocketClient.cs" />
+    <Compile Include="EventArgs.cs" />
+    <Compile Include="Listener.cs" />
+    <Compile Include="IgeNetStream.cs" />
+    <Compile Include="Packet.cs" />
+    <Compile Include="PacketAttribute.cs" />
+    <Compile Include="PacketRegistryEntry.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawClient.cs" />
+    <Compile Include="Server.cs" />
+    <Compile Include="SystemPackets\EncryptedRawPacket.cs" />
+    <Compile Include="SystemPackets\RawPacket.cs" />
+    <Compile Include="SystemPackets\RijndaelEncryptionKeyPacket.cs" />
+    <Compile Include="SystemPackets\RSAClientPublicKeyPacket.cs" />
+    <Compile Include="SystemPackets\RSAServerPublicKeyPacket.cs" />
+    <Compile Include="Utils\Http.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Clients" />
+    <Folder Include="SystemPackets" />
+    <Folder Include="Utils" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IGE.Common\IGE.Common.csproj">
+      <Project>{9FF16105-BE2B-44A2-91C0-D79F38AD8BA6}</Project>
+      <Name>IGE.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

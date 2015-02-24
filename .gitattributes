@@ -1,0 +1,38 @@
+* text=auto
+
+makefile text eol=lf
+*.mk text eol=lf
+*.xml text eol=lf
+*.html text eol=lf
+
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.sln text eol=crlf
+*.txt text eol=crlf
+*.log text eol=crlf
+*.Settings text eol=crlf
+*.cpp text eol=crlf
+*.h text eol=crlf
+*.dsw text eol=crlf
+*.dsp text eol=crlf
+*.plg text eol=crlf
+*.rc text eol=crlf
+
+*.ico binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.tga binary
+*.dat binary
+*.pdb binary
+*.mdb binary
+*.exe binary
+*.dll binary
+*.cache binary
+*.ncb binary
+*.opt binary
+*.idb binary
+*.obj binary
+*.pch binary
+*.res binary
+*.raw binary
