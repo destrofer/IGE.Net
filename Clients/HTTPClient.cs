@@ -39,6 +39,8 @@ namespace IGE.Net.Clients {
 		private char[] FirstLineSplitter = new char[] {' '};
 		private char[] HeaderLineSplitter = new char[] {':'};
 
+		protected ManualResetEvent m_ContentLoaded = new ManualResetEvent(false);
+		
 		protected Thread m_RequestHandlerThread = null;
 		
 		protected bool m_HeaderDone = false;
@@ -137,6 +139,9 @@ namespace IGE.Net.Clients {
 								Disconnect();
 								return;
 							}
+							else if( m_Request.ContentLength == 0 ) {
+								m_ContentLoaded.Set();
+							}
 							
 							break;
 						}
@@ -164,6 +169,8 @@ namespace IGE.Net.Clients {
 			
 			m_Request.ContentBytesReceived += buffer.Length - pos;
 			EnqueueIncomingRawData(buffer, pos, buffer.Length - pos);
+			if( m_Request.ContentBytesReceived >= m_Request.ContentLength )
+				m_ContentLoaded.Set();
 		}
 		
 		protected virtual void HandleRequest() {
@@ -221,6 +228,14 @@ namespace IGE.Net.Clients {
 		public virtual bool Send(HTTPData data) {
 			byte[] dataBytes = data.GetBytes();
 			return Send(dataBytes) == dataBytes.Length;
+		}
+		
+		public virtual void WaitUntilContentReceived() {
+			m_ContentLoaded.WaitOne();
+		}
+		
+		public virtual void WaitUntilContentReceived(int millisecondsTimeout) {
+			m_ContentLoaded.WaitOne(millisecondsTimeout);
 		}
 	}
 	
